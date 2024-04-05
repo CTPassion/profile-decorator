@@ -3,11 +3,13 @@
 # pylint: disable = missing-function-docstring
 import asyncio
 import cProfile
+from functools import wraps
+import io
 import logging
 import pstats
 from pstats import SortKey
-import io
-from functools import wraps
+from typing import Any, Callable, List, Optional, Union, Tuple
+
 
 VALID_SORTS = set(
     val
@@ -17,14 +19,34 @@ VALID_SORTS = set(
 )
 
 
-def profile(n_rows=50, sort_by="cumulative", output="stdout", filename=None):
+def profile(
+    n_rows: int = 50,
+    sort_by: Union[str, List[str], Tuple] = "cumulative",
+    output: str = "stdout",
+    filename: Optional[str] = None
+) -> Callable:
+    """
+    Decorator to profile a function.
 
+    Args:
+        n_rows: Number of rows to reduce profile output to.
+        sort_by: What statistic(s) to sort by in the results.
+        output: How to output the results.
+        filename: The filename to output to if output='file'
+
+    Returns:
+        func return
+
+    Raises:
+        ValueError: Invalid value for parameter.
+        IOError: Error writing to file.
+    """
     valid_outputs = {"stdout", "file", "log"}
 
-    def decorator(func):
+    def decorator(func: Callable) -> Callable:
 
         @wraps(func)
-        async def async_wrapper(*args, **kwargs):
+        async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
             with cProfile.Profile() as pr:
                 # Directly await the async function here
                 result = await func(*args, **kwargs)
@@ -33,7 +55,7 @@ def profile(n_rows=50, sort_by="cumulative", output="stdout", filename=None):
             return result
 
         @wraps(func)
-        def sync_wrapper(*args, **kwargs):
+        def sync_wrapper(*args: Any, **kwargs: Any) -> Any:
             with cProfile.Profile() as pr:
                 result = func(*args, **kwargs)
                 process_profiling_results(pr)
@@ -44,7 +66,7 @@ def profile(n_rows=50, sort_by="cumulative", output="stdout", filename=None):
             return async_wrapper
         return sync_wrapper
 
-    def process_profiling_results(pr):
+    def process_profiling_results(pr: cProfile.Profile) -> None:
         s = io.StringIO()
         # Fallback to 'cumulative' if sort_by is invalid
         if isinstance(sort_by, (list, tuple)):
