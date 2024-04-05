@@ -1,4 +1,6 @@
-# pylint: disable = missing-module-docstring,missing-function-docstring
+"""profile decorator definition"""
+
+# pylint: disable = missing-function-docstring
 import asyncio
 import cProfile
 import logging

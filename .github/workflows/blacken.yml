@@ -18,8 +18,9 @@ jobs:
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: 'Format Python code with Black [skip ci]'
+        commit_message: Format Python code with Black [skip ci]
         branch: ${{ github.head_ref }}
         commit_options: '--no-verify'
         file_pattern: '.'
-        
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

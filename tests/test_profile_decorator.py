@@ -1,8 +1,12 @@
-import pytest
+"""Unit tests using pytest for profile decorator"""
+
 import asyncio
-from src.profile_decorator import profile
-import os
 import logging
+import os
+import pytest
+
+from src.profile_decorator import profile
+
 
 # Logger for capturing log output tests
 logger = logging.getLogger("test_logger")
@@ -19,7 +23,9 @@ def test_sync_function_profiling():
         return sum(range(100))
 
     # The function should run without errors and return the correct result
-    assert test_func() == sum(range(100)), "The profiled function does not return the expected result."
+    assert test_func() == sum(
+        range(100)
+    ), "The profiled function does not return the expected result."
 
 
 @pytest.mark.asyncio
@@ -32,14 +38,16 @@ async def test_async_function_profiling():
         return "async result"
 
     # The function should run without errors and return the correct result
-    assert await test_async_func() == "async result", "The profiled async function does not return the expected result."
+    assert (
+        await test_async_func() == "async result"
+    ), "The profiled async function does not return the expected result."
 
 
 def test_output_to_file():
     """Test output to file functionality."""
     filename = "test_profile_output.txt"
 
-    @profile(output='file', filename=filename)
+    @profile(output="file", filename=filename)
     def test_func():
         return sum(range(10))
 
@@ -57,7 +65,7 @@ def test_invalid_output_option():
     """Test handling of invalid output option."""
     with pytest.raises(ValueError):
 
-        @profile(output='invalid_option')
+        @profile(output="invalid_option")
         def test_func():
             pass
 
@@ -66,7 +74,8 @@ def test_invalid_output_option():
 
 def test_logging_output(caplog):
     """Test logging output functionality."""
-    @profile(output='log')
+
+    @profile(output="log")
     def test_func():
         return sum(range(10))
 

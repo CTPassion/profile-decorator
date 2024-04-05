@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 [project]
 name = "profile_decorator"
 dynamic = ["version"]
-description = "Simplifies Python code profiling by offering an easy-to-use decorator (profile_me) for measuring function performance. Customize profiling with options for sort criteria and output format. Perfect for quickly identifying bottlenecks."
+description = "Simplifies Python code profiling by offering an easy-to-use decorator for measuring function performance. Customize profiling with options for sort criteria and output format. Perfect for quickly identifying bottlenecks."
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [{ name="Joshua Brumpton", email="ja.brumpton@gmail.com" }]
