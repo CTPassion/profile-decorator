@@ -8,7 +8,7 @@
 <h3 align="center">profile-decorator</h3>
 
   <p align="center">
-    Simplifies method profiling
+    Simplifies Method Profiling
   </p>
 </div>
 

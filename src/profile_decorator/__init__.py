@@ -1,3 +1,4 @@
+# pylint: disable = missing-module-docstring,missing-function-docstring
 import cProfile
 import pstats
 from pstats import SortKey
@@ -45,10 +46,10 @@ def profile_me(n_rows=50, sort_by="cumulative", output="stdout", filename=None):
                 if not filename:
                     raise ValueError("Filename must be provided when output is 'file'.")
                 try:
-                    with open(filename, "w+") as f:
+                    with open(filename, "w+", encoding="utf-8") as f:
                         f.write(s.getvalue())
                 except IOError as e:
-                    raise IOError(f"Error writing to file {filename}: {e}")
+                    raise IOError(f"Error writing to file {filename}: {e}") from e
 
             return result
 
