@@ -21,14 +21,31 @@ Homepage = "https://github.com/CTPassion/profile_me"
 Issues = "https://github.com/CTPassion/profile_me/issues"
 
 [project.optional-dependencies]
+dev = [
+    "black"
+]
 test = [
     "pytest",
-    "pytest-asyncio",
-    "black"
+    "pytest-asyncio"
 ]
 
 [tool.pytest.ini_options]
-python_paths = ["src"]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests"
+]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.pylint]
+max-line-length = 88
+disable = [
+    "C0114", # (missing-module-docstring)
+    "C0115", # (missing-class-docstring)
+    "C0116", # (missing-function-docstring)
+]
 
 [tool.hatch.version]
 path = "src/profile_decorator/version.py"
