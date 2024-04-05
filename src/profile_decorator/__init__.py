@@ -50,6 +50,8 @@ def profile_me(n_rows=50, sort_by="cumulative", output="stdout", filename=None):
                         f.write(s.getvalue())
                 except IOError as e:
                     raise IOError(f"Error writing to file {filename}: {e}") from e
+            else:
+                raise ValueError("'output' must be one of 'stdout' or 'file'.")
 
             return result
 
