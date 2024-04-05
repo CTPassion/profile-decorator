@@ -23,7 +23,7 @@ def profile(
     n_rows: int = 50,
     sort_by: Union[str, List[str], Tuple] = "cumulative",
     output: str = "stdout",
-    filename: Optional[str] = None
+    filename: Optional[str] = None,
 ) -> Callable:
     """
     Decorator to profile a function.
