@@ -7,6 +7,7 @@ History:
 0.0.2   New documentation added.
 0.0.3   Workflows added
 0.0.4   Renamed decorator, added async support, added unit tests
+0.0.5   Fixed workflows
 """
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
