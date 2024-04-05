@@ -19,5 +19,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint pytest pytest-asyncio
     - name: Analysing the code with pylint
+      env:
+        PYTHONPATH: ${{ github.workspace }}/src
       run: |
         pylint $(git ls-files '*.py')
