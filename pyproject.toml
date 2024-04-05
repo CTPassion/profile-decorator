@@ -20,6 +20,13 @@ classifiers = [
 Homepage = "https://github.com/CTPassion/profile_me"
 Issues = "https://github.com/CTPassion/profile_me/issues"
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+    "black"
+]
+
 [tool.hatch.version]
 path = "src/profile_decorator/version.py"
 
