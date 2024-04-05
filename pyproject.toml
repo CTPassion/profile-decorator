@@ -27,6 +27,9 @@ test = [
     "black"
 ]
 
+[tool.pytest.ini_options]
+python_paths = ["src"]
+
 [tool.hatch.version]
 path = "src/profile_decorator/version.py"
 
